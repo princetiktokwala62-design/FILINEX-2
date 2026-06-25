@@ -1,0 +1,180 @@
+{
+  "theme": "dark",
+  "archetype": "Archetype 5 (Luxury) + Archetype 4 (Swiss & High-Contrast)",
+  "design_philosophy": "Cinematic, Futuristic, Premium, Intelligent, Sophisticated, Highly interactive, Expensive. Dark luxury tech aesthetic.",
+  "colors": {
+    "primary_bg": "#050505",
+    "secondary_bg": "#0A0A0A",
+    "carbon_graphite": "#121212",
+    "primary_accent": "#007AFF", 
+    "royal_purple": "#5E5CE6",
+    "platinum_silver": "#EBEBF5",
+    "deep_cyan": "#32ADE6",
+    "soft_violet": "#AF52DE",
+    "emerald": "#34C759",
+    "warm_white": "#F2F2F7",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "rgba(255, 255, 255, 0.7)",
+    "text_tertiary": "rgba(255, 255, 255, 0.4)",
+    "border_subtle": "rgba(255, 255, 255, 0.08)"
+  },
+  "typography": {
+    "heading_font": "Cabinet Grotesk",
+    "body_font": "Satoshi",
+    "mono_font": "JetBrains Mono",
+    "hierarchy": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter font-medium",
+      "h2": "text-3xl sm:text-4xl tracking-tight font-medium",
+      "h3": "text-xl sm:text-2xl font-medium",
+      "body": "text-base leading-relaxed text-white/70",
+      "mono_label": "text-xs tracking-[0.2em] uppercase font-mono text-white/50"
+    }
+  },
+  "glassmorphism_tokens": {
+    "surface": "bg-white/[0.02]",
+    "surface_hover": "hover:bg-white/[0.04]",
+    "blur": "backdrop-blur-2xl",
+    "border": "border border-white/[0.08]",
+    "border_hover": "hover:border-white/[0.15]",
+    "shadow": "shadow-[0_8px_32px_rgba(0,0,0,0.5)]",
+    "inner_glow": "box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1)"
+  },
+  "lighting_recipes": {
+    "aurora_orb": "absolute rounded-full blur-[100px] opacity-30 mix-blend-screen",
+    "mouse_glow": "radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)",
+    "card_spotlight": "radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.04), transparent 40%)"
+  },
+  "animations": {
+    "easing": "cubic-bezier(0.16, 1, 0.3, 1)",
+    "duration_fast": "200ms",
+    "duration_normal": "400ms",
+    "duration_slow": "800ms",
+    "hover_transform": "-translate-y-1 scale-[1.02]",
+    "parallax_speed": "0.1 to 0.3",
+    "reveal_on_scroll": "opacity-0 translate-y-8 -> opacity-100 translate-y-0"
+  },
+  "component_specs": {
+    "hero": {
+      "layout": "min-h-screen flex flex-col justify-center items-center relative overflow-hidden",
+      "background": "Cinematic video + TSParticles canvas overlay + bg-black/60 overlay",
+      "content_alignment": "center",
+      "text_style": "Cabinet Grotesk, massive text with gradient text fill (silver to white)",
+      "cta_button": "Glassmorphic button with inner glow, backdrop-blur, and tracking beam border effect"
+    },
+    "service_cards": {
+      "layout": "Bento grid or 3-column grid",
+      "style": "Frosted glass card, 1px subtle border, soft inner glow",
+      "interaction": "Tilt-on-hover (framer-motion or vanilla-tilt), mouse-reactive spotlight background",
+      "iconography": "Phosphor icons (Duotone) in primary accent color"
+    },
+    "project_showcase": {
+      "layout": "Overlapping or wide bento-style cards",
+      "style": "Dark gradient backgrounds, high-res dashboard mockups",
+      "interaction": "3D perspective shift on hover, expand details"
+    },
+    "timeline": {
+      "layout": "Vertical line with glowing nodes, or horizontal scroller",
+      "style": "Neon blue/purple glowing line on active state",
+      "interaction": "Nodes light up as scrolled into view"
+    },
+    "testimonials": {
+      "layout": "Auto-sliding infinite marquee or carousel",
+      "style": "Glass cards, soft particle effects in background",
+      "avatar": "grayscale image with color reveal on hover"
+    },
+    "cta_section": {
+      "layout": "Massive padding (py-32), central alignment",
+      "style": "Animated aurora lights (CSS gradients blur-[120px]) behind the text",
+      "button": "Magnetic hover effect"
+    }
+  },
+  "media_urls": {
+    "background_videos": [
+      {
+        "url": "https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-network-connections-loop-27357-large.mp4",
+        "description": "Abstract technology network connections loop",
+        "category": "hero_video"
+      },
+      {
+        "url": "https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-blue-and-pink-nebula-31641-large.mp4",
+        "description": "Cinematic nebula aurora effect",
+        "category": "hero_video_alternative"
+      }
+    ],
+    "hero_fallback_images": [
+      {
+        "url": "https://images.unsplash.com/photo-1567095751004-aa51a2690368?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxjaW5lbWF0aWMlMjB0ZWNobm9sb2d5JTIwYWJzdHJhY3QlMjBkYXJrfGVufDB8fHx8MTc4MjM3NTI1M3ww&ixlib=rb-4.1.0&q=85",
+        "description": "gray and blue wallpaper abstract",
+        "category": "hero_background"
+      }
+    ],
+    "project_mockups": [
+      {
+        "url": "https://images.unsplash.com/photo-1763718528755-4bca23f82ac3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHw0fHxkYXNoYm9hcmQlMjBhcHAlMjB1aSUyMGFic3RyYWN0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "AI Clinic Platform Dashboard",
+        "category": "project_image"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1686061593213-98dad7c599b9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHwzfHxkYXNoYm9hcmQlMjBhcHAlMjB1aSUyMGFic3RyYWN0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Trading Platform Interface",
+        "category": "project_image"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1686061592689-312bbfb5c055?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHwyfHxkYXNoYm9hcmQlMjBhcHAlMjB1aSUyMGFic3RyYWN0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Crypto Ecosystem Dashboard",
+        "category": "project_image"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NDh8MHwxfHNlYXJjaHwxfHxkYXNoYm9hcmQlMjBhcHAlMjB1aSUyMGFic3RyYWN0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Image & Video AI Analytics",
+        "category": "project_image"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1526289034009-0240ddb68ce3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwyfHxjaW5lbWF0aWMlMjB0ZWNobm9sb2d5JTIwYWJzdHJhY3QlMjBkYXJrfGVufDB8fHx8MTc4MjM3NTI1M3ww&ixlib=rb-4.1.0&q=85",
+        "description": "Enterprise Social Earning abstract architecture",
+        "category": "project_image"
+      }
+    ],
+    "testimonial_avatars": [
+      {
+        "url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Testimonial Avatar 1",
+        "category": "avatar"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Testimonial Avatar 2",
+        "category": "avatar"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1607503873903-c5e95f80d7b9?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Testimonial Avatar 3",
+        "category": "avatar"
+      },
+      {
+        "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzB8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc4MjM3NTI1OXww&ixlib=rb-4.1.0&q=85",
+        "description": "Testimonial Avatar 4",
+        "category": "avatar"
+      }
+    ]
+  },
+  "libraries": {
+    "icons": "@phosphor-icons/react",
+    "animations": "framer-motion",
+    "particles": "tsparticles",
+    "scrolling": "lenis"
+  },
+  "testing": {
+    "attributes": "data-testid",
+    "convention": "kebab-case, role-based"
+  },
+  "instructions_to_main_agent": [
+    "Ensure global background is set to the dark gradient or #050505.",
+    "Implement mouse-reactive spotlight effect using CSS vars tracked via React state/ref on cards.",
+    "Use Cabinet Grotesk for Headings and Satoshi for body. Use JetBrains Mono for overlines and stats.",
+    "Use TSParticles layered on top of the hero background video for the 'particles overlay' effect.",
+    "Project cards should have tilt effect (e.g., using framer-motion useMotionValue).",
+    "Install and use Lenis for smooth scrolling.",
+    "Ensure all interactive elements have data-testid attributes."
+  ]
+}
