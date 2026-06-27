@@ -5,9 +5,10 @@ import uuid
 import pytest
 import requests
 
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://innovation-hub-225.preview.emergentagent.com").rstrip("/")
+BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://e17ee658-09e0-4de0-a9ac-59df5558a6ae.preview.emergentagent.com").rstrip("/")
 ADMIN_EMAIL = "admin@filinex.com"
-ADMIN_PASSWORD = "Filinex@2026"
+ADMIN_PASSWORD = "password"
+OLD_ADMIN_PASSWORD = "Filinex@2026"
 
 
 @pytest.fixture(scope="session")
@@ -237,3 +238,77 @@ class TestStats:
         assert d["countries_served"] == 34
         assert d["client_satisfaction"] == 98
         assert d["technologies_mastered"] == 42
+
+
+# ---------- Admin password rotation (new in iter 2) ----------
+class TestAdminPasswordRotation:
+    def test_old_password_rejected(self, api):
+        r = api.post(f"{BASE_URL}/api/admin/login", json={"email": ADMIN_EMAIL, "password": OLD_ADMIN_PASSWORD})
+        assert r.status_code == 401, f"Old password 'Filinex@2026' should no longer work, got {r.status_code}"
+
+    def test_new_password_works(self, api):
+        r = api.post(f"{BASE_URL}/api/admin/login", json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD})
+        assert r.status_code == 200
+        assert "token" in r.json()
+
+
+# ---------- AI Brief Assistant (new endpoint) ----------
+class TestBriefChat:
+    def test_brief_greeting_empty_messages(self, api):
+        session_id = f"test-{uuid.uuid4().hex[:10]}"
+        r = api.post(
+            f"{BASE_URL}/api/brief/chat",
+            json={"session_id": session_id, "messages": []},
+            timeout=60,
+        )
+        assert r.status_code == 200, r.text
+        data = r.json()
+        assert "reply" in data and isinstance(data["reply"], str)
+        assert len(data["reply"]) > 0, "Greeting should be non-empty"
+        assert data.get("finished") is False
+
+    def test_brief_continues_conversation(self, api):
+        session_id = f"test-{uuid.uuid4().hex[:10]}"
+        # 1. greeting
+        r1 = api.post(
+            f"{BASE_URL}/api/brief/chat",
+            json={"session_id": session_id, "messages": []},
+            timeout=60,
+        )
+        assert r1.status_code == 200
+        greeting = r1.json()["reply"]
+        # 2. user reply
+        msgs = [
+            {"role": "assistant", "content": greeting},
+            {"role": "user", "content": "I want to build an AI-powered fintech SaaS for SMB invoicing."},
+        ]
+        r2 = api.post(
+            f"{BASE_URL}/api/brief/chat",
+            json={"session_id": session_id, "messages": msgs},
+            timeout=60,
+        )
+        assert r2.status_code == 200, r2.text
+        data = r2.json()
+        assert isinstance(data["reply"], str) and len(data["reply"]) > 0
+        # Should not echo "[BRIEF_COMPLETE]" verbatim — backend strips that token
+        assert "[BRIEF_COMPLETE]" not in data["reply"]
+
+    def test_brief_lead_with_ai_brief_source(self, api):
+        """Final brief submit creates lead with source='ai_brief' and brief_transcript."""
+        payload = {
+            "name": "TEST_AI_Brief",
+            "email": f"brief_{uuid.uuid4().hex[:8]}@example.com",
+            "source": "ai_brief",
+            "message": "AI brief summary line",
+            "brief_transcript": [
+                {"role": "assistant", "content": "Hi!"},
+                {"role": "user", "content": "I want a SaaS."},
+            ],
+        }
+        r = api.post(f"{BASE_URL}/api/leads", json=payload)
+        assert r.status_code == 200, r.text
+        data = r.json()
+        assert data["source"] == "ai_brief"
+        assert isinstance(data.get("brief_transcript"), list)
+        assert len(data["brief_transcript"]) == 2
+

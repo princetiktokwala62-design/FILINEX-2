@@ -20,6 +20,7 @@ export default function AIBriefAssistant() {
   const [submitting, setSubmitting] = useState(false);
   const [contact, setContact] = useState({ name: "", email: "" });
   const scrollRef = useRef(null);
+  const bootedRef = useRef(false);
 
   const scrollToBottom = () => {
     requestAnimationFrame(() => {
@@ -28,9 +29,11 @@ export default function AIBriefAssistant() {
     });
   };
 
-  // bootstrap greeting
+  // bootstrap greeting (guard against React StrictMode double-mount)
   useEffect(() => {
-    if (messages.length === 0) sendToServer([]);
+    if (bootedRef.current) return;
+    bootedRef.current = true;
+    sendToServer([]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
