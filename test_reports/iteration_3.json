@@ -1,0 +1,28 @@
+{
+  "summary": "Iteration 3 frontend bug-fix verification. Both reported bugs FIXED. (1) Image-to-project mapping verified correct on all 3 pages (Home #portfolio, /portfolio, /case-studies) — 15/15 cards show the right screenshot. STAKE BLC=8hypolfw_stakeblc.png, NEOTRADE=5ezdtr9h_neotrade.png, AI Clinic=ib2jnwvi_Aiclinic.png, DYNOVA=uekex91n_dynovanetwork.png, 3D Game=unsplash placeholder. All 4 customer-asset URLs return HTTP 200 and load (naturalWidth 1341–1366). (2) NO text overlay: on Home and Portfolio the title.y is BELOW image.bottom (e.g. NEOTRADE home title.y=412 vs image.bottom=384) confirming title/summary/metrics/tech now render in a separate p-6 area beneath the image; only the category tag (top-left) and the Live link (top-right, where present) live on the image. Case-Studies uses the intentional side-by-side 2-col grid (image left column, content right column) — not a text-on-image overlay. Hover metric reveal works (stakeblc 'Market Cap' visible on hover). project-live-stakeblc visible with href=https://stakeblc.online. Regression: admin login admin@filinex.com/password stores 163-char JWT, /contact renders form-only (no contact-mode-ai/form toggle buttons — AI Brief properly hidden), /estimator loads as 'Request a Proposal', FILINEX logo + Request Proposal CTA present on home, zero console errors across all pages tested.",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/test_reports/pytest/pytest_results.xml",
+    "/app/backend/tests/backend_test.py"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Projects.jsx ProjectCard idx 0 and 3 force lg:col-span-2 (isWide). With only 5 cards in a 3-col grid this means rows are 2+1+2, with the third row's last card hanging alone in col 1 of row 3 — visually OK but slightly asymmetric. Consider making only idx 0 wide, or adding a 6th project so rows balance.",
+    "Portfolio.jsx CATS array has category names ('Web3 · Blockchain', 'Generative AI · SaaS', 'Consumer · Web3') that DO NOT MATCH the categories actually present in PROJECTS (which are 'Web3 · DeFi', 'FinTech · SaaS', 'AI · Healthcare', 'Consumer · FinTech', '3D · Gaming'). Clicking any non-'All' filter except 'AI · Healthcare' or 'FinTech · SaaS' will yield an empty grid. Update CATS to reflect actual data.",
+    "CaseStudies.jsx image uses bg-gradient-to-r from-obsidian/40 — slight darkening on the image's left edge. With the new (correctly mapped) screenshots, this is acceptable but consider lowering opacity further if any darkening still hides UI details.",
+    "All 4 customer-asset PNGs are 200KB–786KB — large for a home-page hero grid. Consider adding a CDN width param or <picture> srcset to serve a 600w variant for mobile/3-col grid (each card only renders ~520px wide max on lg)."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "skipped (frontend-only request)", "frontend": "100% (both bug fixes + all regression flows passing)" },
+  "test_credentials": "admin@filinex.com / password (verified working, 163-char JWT stored in filinex_admin_token)",
+  "seed_data_creation": "None this iteration.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Iteration 3 bug fixes (correct image mapping + no text overlay on Projects.jsx) verified end-to-end. Note Portfolio.jsx CATS filter list is stale and doesn't match actual project categories — mention in next agent's context if Portfolio filter is in scope. Backend not retested this iteration (review said frontend-only, no backend changes). Backend pytest suite at /app/backend/tests/backend_test.py (27 tests, last run 100%).",
+  "rca of the issue": "Root cause of original bugs: (a) Image asset filenames were generic/swapped, so the wrong screenshot URL ended up on each project entry in /app/frontend/src/data/projects.js. User renamed assets (stakeblc.png, neotrade.png, Aiclinic.png, dynovanetwork.png) and the data file was updated to point at the new URLs. (b) Projects.jsx previously placed the title/summary INSIDE the image container with absolute positioning, causing visible overlap on NEOTRADE etc. Fix: image is now in a self-contained aspect-[16/10] block with only the category tag + Live link as overlays; all textual content moved to a separate p-6 flex column BELOW the image. Object-cover + object-top crops to the top of the screenshot so each website hero/header is visible without distortion. Verified via Playwright bounding-box comparison: title.y > image.bottom on all Home and Portfolio cards."
+}

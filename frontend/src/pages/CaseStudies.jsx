@@ -31,9 +31,9 @@ export default function CaseStudies() {
             className="glass rounded-3xl overflow-hidden grid lg:grid-cols-2"
             data-testid={`case-study-${p.id}`}
           >
-            <div className={`relative aspect-[4/3] lg:aspect-auto ${i % 2 === 1 ? "lg:order-2" : ""}`}>
-              <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-r from-obsidian/80 via-obsidian/30 to-transparent lg:bg-gradient-to-l" />
+            <div className={`relative aspect-[4/3] lg:aspect-auto overflow-hidden bg-graphite ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+              <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover object-top" />
+              <div className="absolute inset-0 bg-gradient-to-r from-obsidian/40 via-transparent to-transparent lg:bg-gradient-to-l pointer-events-none" />
             </div>
             <div className="p-8 sm:p-12 flex flex-col justify-center">
               <span className="mono-label" style={{ fontSize: "0.62rem" }}>

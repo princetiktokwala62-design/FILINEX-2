@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { PROJECTS } from "@/data/projects";
 
 function ProjectCard({ project, idx }) {
@@ -8,10 +8,10 @@ function ProjectCard({ project, idx }) {
   const [hovered, setHovered] = useState(false);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const rx = useTransform(my, [-0.5, 0.5], ["6deg", "-6deg"]);
-  const ry = useTransform(mx, [-0.5, 0.5], ["-6deg", "6deg"]);
-  const sx = useSpring(rx, { stiffness: 180, damping: 18 });
-  const sy = useSpring(ry, { stiffness: 180, damping: 18 });
+  const rx = useTransform(my, [-0.5, 0.5], ["4deg", "-4deg"]);
+  const ry = useTransform(mx, [-0.5, 0.5], ["-4deg", "4deg"]);
+  const sx = useSpring(rx, { stiffness: 180, damping: 22 });
+  const sy = useSpring(ry, { stiffness: 180, damping: 22 });
 
   const onMove = (e) => {
     const el = ref.current;
@@ -41,7 +41,7 @@ function ProjectCard({ project, idx }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={onLeave}
       style={{ rotateX: sx, rotateY: sy, transformPerspective: 1200 }}
-      className={`group spotlight glass rounded-2xl overflow-hidden relative ${
+      className={`group spotlight glass rounded-2xl overflow-hidden relative flex flex-col ${
         isWide ? "lg:col-span-2" : "lg:col-span-1"
       }`}
       initial={{ opacity: 0, y: 28 }}
@@ -49,55 +49,77 @@ function ProjectCard({ project, idx }) {
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="relative aspect-[16/10] overflow-hidden">
+      {/* Image — clean, no text overlay */}
+      <div className="relative aspect-[16/10] overflow-hidden bg-graphite">
         <img
           src={project.image}
           alt={project.title}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+          className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-1000 group-hover:scale-105"
           loading="lazy"
         />
-        <div className={`absolute inset-0 bg-gradient-to-t ${project.accent}`} />
-        <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-transparent" />
+        {/* Light scrim only at top to make category tag readable */}
+        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-obsidian/80 to-transparent pointer-events-none" />
+        <div className={`absolute top-0 right-0 h-32 w-32 bg-gradient-to-bl ${project.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none`} />
 
-        <div className="absolute inset-0 p-6 sm:p-8 flex flex-col justify-end">
-          <span className="mono-label" style={{ fontSize: "0.65rem" }}>
-            {project.category}
-          </span>
-          <h3 className="mt-2 font-display text-2xl sm:text-3xl font-medium tracking-tight">
-            {project.title}
-          </h3>
-          <p className="mt-2 max-w-xl text-sm text-white/65 leading-relaxed">
-            {project.summary}
-          </p>
-
-          <motion.div
-            initial={false}
-            animate={{ height: hovered ? "auto" : 0, opacity: hovered ? 1 : 0 }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
+        <span className="absolute top-4 left-4 mono-label glass px-2.5 py-1 rounded-full backdrop-blur-md" style={{ fontSize: "0.6rem" }}>
+          {project.category}
+        </span>
+        {project.live_url && (
+          <a
+            href={project.live_url}
+            target="_blank"
+            rel="noreferrer"
+            data-testid={`project-live-${project.id}`}
+            className="absolute top-4 right-4 inline-flex items-center gap-1 mono-label glass px-2.5 py-1 rounded-full hover:bg-white/15 transition-colors"
+            style={{ fontSize: "0.6rem" }}
           >
-            <div className="mt-5 grid grid-cols-3 gap-3">
-              {project.metrics.map((m) => (
-                <div key={m.label} className="glass rounded-xl px-3 py-2.5">
-                  <div className="font-display text-lg font-medium">{m.value}</div>
-                  <div className="text-[10px] uppercase tracking-widest text-white/40">
-                    {m.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 flex flex-wrap gap-1.5">
-              {project.tech.map((t) => (
-                <span key={t} className="px-2.5 py-1 rounded-full bg-white/[0.06] text-[11px] text-white/65 border border-white/10">
-                  {t}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+            <ExternalLink className="h-2.5 w-2.5" /> Live
+          </a>
+        )}
+      </div>
 
-          <div className="mt-5 inline-flex items-center gap-2 text-sm text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">
-            Read case study <ArrowUpRight className="h-4 w-4" />
+      {/* Content — separate clean area below image */}
+      <div className="relative p-6 sm:p-7 flex flex-col flex-1">
+        <h3 className="font-display text-xl sm:text-2xl font-medium tracking-tight">
+          {project.title}
+        </h3>
+        <p className="mt-2.5 text-sm text-white/65 leading-relaxed">
+          {project.summary}
+        </p>
+
+        <motion.div
+          initial={false}
+          animate={{ height: hovered ? "auto" : 0, opacity: hovered ? 1 : 0 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="overflow-hidden"
+        >
+          <div className="mt-5 grid grid-cols-3 gap-2.5">
+            {project.metrics.map((m) => (
+              <div key={m.label} className="glass rounded-xl px-3 py-2.5">
+                <div className="font-display text-base font-medium text-aurora">{m.value}</div>
+                <div className="text-[10px] uppercase tracking-widest text-white/40 mt-0.5">
+                  {m.label}
+                </div>
+              </div>
+            ))}
           </div>
+        </motion.div>
+
+        <div className="mt-5 flex flex-wrap items-center gap-1.5">
+          {project.tech.slice(0, 5).map((t) => (
+            <span key={t} className="px-2.5 py-1 rounded-full bg-white/[0.05] text-[11px] text-white/60 border border-white/10">
+              {t}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between">
+          <span className="text-xs text-white/45 font-mono uppercase tracking-wider">
+            Case · {String(idx + 1).padStart(2, "0")}
+          </span>
+          <span className="inline-flex items-center gap-1.5 text-xs font-medium text-electric group-hover:gap-2.5 transition-all">
+            Read case study <ArrowUpRight className="h-3.5 w-3.5" />
+          </span>
         </div>
       </div>
     </motion.article>

@@ -59,15 +59,15 @@ export default function Portfolio() {
               className="glass rounded-2xl overflow-hidden group spotlight"
               data-testid={`portfolio-card-${p.id}`}
             >
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover group-hover:scale-110 transition-transform duration-1000" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/30 to-transparent" />
-              </div>
-              <div className="p-6 sm:p-8">
-                <span className="mono-label" style={{ fontSize: "0.62rem" }}>
+              <div className="relative aspect-[16/10] overflow-hidden bg-graphite">
+                <img src={p.image} alt={p.title} className="absolute inset-0 h-full w-full object-cover object-top group-hover:scale-105 transition-transform duration-1000" loading="lazy" />
+                <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-obsidian/80 to-transparent pointer-events-none" />
+                <span className="absolute top-4 left-4 mono-label glass px-2.5 py-1 rounded-full backdrop-blur-md" style={{ fontSize: "0.6rem" }}>
                   {p.category}
                 </span>
-                <h3 className="mt-3 font-display text-2xl font-medium">{p.title}</h3>
+              </div>
+              <div className="p-6 sm:p-8">
+                <h3 className="font-display text-2xl font-medium">{p.title}</h3>
                 <p className="mt-2 text-sm text-white/65 leading-relaxed">{p.description}</p>
                 <div className="mt-5 grid grid-cols-3 gap-3">
                   {p.metrics.map((m) => (
