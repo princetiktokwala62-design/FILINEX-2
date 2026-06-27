@@ -35,6 +35,14 @@ ADMIN_EMAIL = os.environ.get("ADMIN_EMAIL", "admin@filinex.com")
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD", "password")
 EMERGENT_LLM_KEY = os.environ.get("EMERGENT_LLM_KEY", "")
 
+# WhatsApp admin notifications (CallMeBot — free, opt-in).
+# Setup: from the admin's WhatsApp, message "+34 644 51 95 23" with the text
+#   "I allow callmebot to send me messages"
+# CallMeBot will reply with an API key. Put that key in env as CALLMEBOT_APIKEY,
+# and set CALLMEBOT_PHONE to the admin's number in international format (e.g. 923004269096).
+CALLMEBOT_PHONE = os.environ.get("CALLMEBOT_PHONE", "")
+CALLMEBOT_APIKEY = os.environ.get("CALLMEBOT_APIKEY", "")
+
 security = HTTPBearer(auto_error=False)
 
 
@@ -295,6 +303,11 @@ async def create_lead(payload: LeadCreate):
     doc.setdefault("source", "contact")
     await db.leads.insert_one(doc)
     doc.pop("_id", None)
+    # Best-effort WhatsApp notification to admin (non-blocking)
+    try:
+        await notify_admin_whatsapp(doc)
+    except Exception:
+        pass
     return Lead(**doc)
 
 

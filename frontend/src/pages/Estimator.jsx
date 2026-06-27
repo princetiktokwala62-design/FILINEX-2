@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import SEO from "@/components/SEO";
 import api from "@/lib/api";
 import AuroraBackground from "@/components/visuals/AuroraBackground";
+import { waLink, buildLeadMessage } from "@/lib/whatsapp";
 
 // Aggressive launch pricing — built to convert international clients on low intro rates.
 export const PROJECT_TYPES = [
@@ -105,9 +106,22 @@ export default function Estimator() {
         source: "proposal",
         estimator_data: { type, features, complexity, timeline, customBudget, estimate },
       });
-      toast.success("Proposal request sent. A senior partner replies in <24h.");
+      toast.success("Proposal request sent. Opening WhatsApp to deliver it instantly.");
       setDone(true);
       if (window.posthog) window.posthog.capture("proposal_submitted", { type, budget: customBudget });
+      // Forward the same summary to the FILINEX team on WhatsApp — no client pricing exposed
+      const wa = waLink(buildLeadMessage({
+        name: contact.name,
+        email: contact.email,
+        company: contact.company,
+        country: contact.country,
+        project_type: PROJECT_TYPES.find((p) => p.id === type)?.label,
+        budget: `$${customBudget.toLocaleString()} target`,
+        timeline: TIMELINES.find((t) => t.id === timeline)?.label,
+        source: "Proposal Wizard",
+        message: `Features: ${features.join(", ") || "—"}\nComplexity: ${complexity}\n\nRequirements:\n${requirements || "(none)"}`,
+      }) + "\n\n_Sent from filinex.com_");
+      setTimeout(() => window.open(wa, "_blank", "noopener,noreferrer"), 600);
     } catch {
       toast.error("Could not send. Try again.");
     } finally {

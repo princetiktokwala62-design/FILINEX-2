@@ -26,9 +26,12 @@ export default function Contact() {
     setSending(true);
     try {
       await api.post("/leads", { ...form, source: "contact" });
-      toast.success("Received. We'll be in touch within 24 hours.");
+      toast.success("Received. We'll be in touch shortly.");
       setDone(true);
       if (window.posthog) window.posthog.capture("contact_form_submitted");
+      // Open WhatsApp with the full summary so admin gets a direct message too
+      const wa = waLink(buildLeadMessage({ ...form, source: "Contact Form" }) + "\n\n_Sent from filinex.com_");
+      setTimeout(() => window.open(wa, "_blank", "noopener,noreferrer"), 600);
     } catch {
       toast.error("Could not send. Please try again.");
     } finally {

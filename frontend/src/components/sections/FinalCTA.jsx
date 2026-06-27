@@ -48,7 +48,7 @@ export default function FinalCTA() {
             Get Free Consultation <ArrowRight className="h-4 w-4" />
           </Link>
           <a
-            href="https://wa.me/14155551234"
+            href="https://wa.me/923004269096?text=Hi%20FILINEX%20%E2%80%94%20I%27d%20like%20to%20chat%20about%20a%20project."
             target="_blank"
             rel="noreferrer"
             data-testid="cta-whatsapp"
