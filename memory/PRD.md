@@ -11,7 +11,14 @@ Design and ship a WORLD-CLASS, BILLION-DOLLAR, PREMIUM SOFTWARE AGENCY WEBSITE c
 - **Animation**: framer-motion + canvas particles + CSS keyframes (aurora, marquee, shimmer)
 - **Fonts**: Cabinet Grotesk (display), Satoshi (body), Instrument Serif (italic accent), JetBrains Mono (mono labels)
 
-## Implemented (Dec 2025)
+## Implemented (Dec 2025 — Iteration 2)
+- **Vercel deployment**: `vercel.json` + `/api/index.py` + `/api/requirements.txt` + `.vercelignore` + `DEPLOY_VERCEL.md` — frontend builds as static SPA, FastAPI runs as Python serverless function, MongoDB Atlas connection via env vars.
+- **AI Brief Assistant** on Contact page — conversational GPT-5.4 agent (via emergentintegrations) that scopes a project in 4-6 turns and creates a pre-qualified `source=ai_brief` lead with the full transcript stored.
+- **Updated projects**: STAKE BLC (BSC staking, $11M+ market cap), NEOTRADE (AI binary options, 50K+ traders), AI Clinic (40+ deployments), DYNOVA Network (Rs 4.9M+ paid out), 3D Game Universe (WebGPU). All with metrics, tech stacks, live URLs.
+- **Admin credentials**: changed to `admin@filinex.com` / `password` (per user request).
+- **Removed**: any Calendly references — WhatsApp float remains the live-chat channel.
+
+## Implemented (Dec 2025 — Iteration 1)
 - Cinematic Home: hero video + canvas particles + aurora orbs + animated counters
 - 6 Service cards with spotlight & tilt
 - 5 Project showcase with 3D-perspective hover
