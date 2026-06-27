@@ -91,7 +91,7 @@ export const PROJECTS = [
       { label: "Checkout", value: "0.9s" },
     ],
     tech: ["Next.js", "Shopify Hydrogen", "Stripe", "Algolia", "AR.js"],
-    image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1600&q=85",
+    image: "https://customer-assets.emergentagent.com/job_innovation-hub-225/artifacts/0adx1h31_ecommerce.jpg",
     live_url: null,
     accent: "from-rose-500/40 to-transparent",
   },

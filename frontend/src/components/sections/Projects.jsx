@@ -31,7 +31,7 @@ function ProjectCard({ project, idx }) {
     setHovered(false);
   };
 
-  const isWide = idx === 0 || idx === 3;
+  const isWide = idx === 0 || idx === 3 || idx === 4;
 
   return (
     <motion.article
