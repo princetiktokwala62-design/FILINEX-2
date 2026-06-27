@@ -32,12 +32,12 @@ export default function FinalCTA() {
         </p>
 
         <div className="mt-10 flex flex-wrap justify-center items-center gap-3">
-          <Link to="/contact">
+          <Link to="/estimator">
             <MagneticButton
               data-testid="cta-book-discovery"
               className="btn-magnet inline-flex items-center gap-2 rounded-full bg-white text-black px-7 py-3.5 text-sm font-medium hover:bg-platinum transition-colors glow-shadow"
             >
-              <Calendar className="h-4 w-4" /> Book Discovery Call
+              <FileText className="h-4 w-4" /> Request Proposal
             </MagneticButton>
           </Link>
           <Link
@@ -47,13 +47,15 @@ export default function FinalCTA() {
           >
             Get Free Consultation <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link
-            to="/estimator"
-            data-testid="cta-request-proposal"
+          <a
+            href="https://wa.me/14155551234"
+            target="_blank"
+            rel="noreferrer"
+            data-testid="cta-whatsapp"
             className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-medium text-white/70 hover:text-white transition-colors"
           >
-            <FileText className="h-4 w-4" /> Request Proposal
-          </Link>
+            <Calendar className="h-4 w-4" /> Chat on WhatsApp
+          </a>
         </div>
 
         <div className="mt-14 flex items-center justify-center gap-6 text-xs text-white/40 font-mono">

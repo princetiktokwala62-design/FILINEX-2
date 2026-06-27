@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "@/components/Logo";
 
 const NAV = [
   { to: "/services", label: "Services" },
@@ -43,13 +44,7 @@ export default function Navbar() {
             data-testid="nav-logo"
             className="flex items-center gap-2 group"
           >
-            <span className="relative inline-flex h-7 w-7 items-center justify-center">
-              <span className="absolute inset-0 rounded-md bg-gradient-to-br from-electric via-royal to-violetx blur-[6px] opacity-60 group-hover:opacity-90 transition-opacity" />
-              <span className="relative inline-block h-5 w-5 rounded-[6px] bg-gradient-to-br from-white to-platinum/70" />
-            </span>
-            <span className="font-display text-[1.05rem] sm:text-lg font-bold tracking-tight">
-              FILINEX
-            </span>
+            <Logo size={32} withWordmark={true} to={null} />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
@@ -88,7 +83,7 @@ export default function Navbar() {
               data-testid="nav-cta-contact"
               className="hidden sm:inline-flex btn-magnet relative items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium bg-white text-black hover:bg-platinum transition-colors"
             >
-              Start a Project
+              Request Proposal
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-emeraldx animate-pulse" />
             </Link>
             <button
@@ -132,7 +127,7 @@ export default function Navbar() {
                 data-testid="nav-mobile-cta"
                 className="mt-2 block text-center rounded-xl bg-white text-black px-4 py-3 text-sm font-medium"
               >
-                Start a Project →
+                Request Proposal →
               </Link>
             </div>
           </motion.div>

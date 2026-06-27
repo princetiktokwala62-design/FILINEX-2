@@ -79,10 +79,10 @@ export default function Hero() {
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <MagneticButton
               data-testid="hero-cta-start"
-              onClick={() => (window.location.href = "/contact")}
+              onClick={() => (window.location.href = "/estimator")}
               className="btn-magnet inline-flex items-center gap-2 rounded-full bg-white text-black px-6 py-3.5 text-sm font-medium hover:bg-platinum transition-colors glow-shadow"
             >
-              Start a Project <ArrowRight className="h-4 w-4" />
+              Request Proposal <ArrowRight className="h-4 w-4" />
             </MagneticButton>
             <Link
               to="/portfolio"
@@ -96,7 +96,7 @@ export default function Hero() {
               data-testid="hero-cta-discovery"
               className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-medium text-white/70 hover:text-white transition-colors"
             >
-              <Calendar className="h-4 w-4" /> Book Discovery Call
+              <Calendar className="h-4 w-4" /> Contact Us
             </Link>
           </div>
         </motion.div>

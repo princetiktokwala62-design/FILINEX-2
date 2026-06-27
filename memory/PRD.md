@@ -11,6 +11,15 @@ Design and ship a WORLD-CLASS, BILLION-DOLLAR, PREMIUM SOFTWARE AGENCY WEBSITE c
 - **Animation**: framer-motion + canvas particles + CSS keyframes (aurora, marquee, shimmer)
 - **Fonts**: Cabinet Grotesk (display), Satoshi (body), Instrument Serif (italic accent), JetBrains Mono (mono labels)
 
+## Implemented (Dec 2025 — Iteration 3)
+- **New FILINEX logo**: stylised "F" SVG mark with platinum→aurora gradient, conic-gradient glow, spark dot. Reusable `<Logo>` component used in Navbar + Footer.
+- **Real portfolio screenshots**: STAKE BLC, NEOTRADE, AI Clinic, DYNOVA Network now use the actual brand screenshots provided by the user. 3D Game still uses placeholder.
+- **AI Brief hidden** on Contact page (component preserved for future re-enable — just removed the toggle).
+- **Request Proposal page redesigned** as a 5-step wizard (Project → Features → Scope → Budget → Details). Launch pricing slashed to attract early customers: Landing $499, Automation $999, Web App $1,999, Mobile $2,499, AI $2,999, SaaS $3,499, Blockchain $4,999, Enterprise $7,499. Budget slider $199-$50k with live estimate + budget-fit feedback ("Excellent fit / Workable / A bit tight"). Custom-requirements textarea included.
+- **Request Proposal CTA on Home**: prominent section between Projects and Process with 8 project-type pricing cards + "4 slots open" social proof + founder avatars.
+- **All hero/footer/nav CTAs unified** to "Request Proposal".
+- **Vercel full-stack deployment ready**: frontend SPA, admin panel (React Router /admin route), AND backend FastAPI all deploy from this single repo. `vercel.json` + `api/index.py` + `api/requirements.txt` + comprehensive `DEPLOY_VERCEL.md`. `api.js` defaults to relative `/api/*` paths when `REACT_APP_BACKEND_URL` is empty (same-origin on Vercel).
+
 ## Implemented (Dec 2025 — Iteration 2)
 - **Vercel deployment**: `vercel.json` + `/api/index.py` + `/api/requirements.txt` + `.vercelignore` + `DEPLOY_VERCEL.md` — frontend builds as static SPA, FastAPI runs as Python serverless function, MongoDB Atlas connection via env vars.
 - **AI Brief Assistant** on Contact page — conversational GPT-5.4 agent (via emergentintegrations) that scopes a project in 4-6 turns and creates a pre-qualified `source=ai_brief` lead with the full transcript stored.

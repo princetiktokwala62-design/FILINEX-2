@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Send, Github, Twitter, Linkedin, ArrowUpRight } from "lucide-react";
 import api from "@/lib/api";
 import { toast } from "sonner";
+import Logo from "@/components/Logo";
 
 const COLS = [
   {
@@ -68,13 +69,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Brand + newsletter */}
           <div className="lg:col-span-5">
-            <div className="flex items-center gap-2">
-              <span className="relative inline-flex h-8 w-8 items-center justify-center">
-                <span className="absolute inset-0 rounded-md bg-gradient-to-br from-electric via-royal to-violetx blur-md opacity-60" />
-                <span className="relative inline-block h-6 w-6 rounded-md bg-gradient-to-br from-white to-platinum/70" />
-              </span>
-              <span className="font-display text-2xl font-bold tracking-tight">FILINEX</span>
-            </div>
+            <Logo size={40} withWordmark={true} to="/" />
             <p className="mt-5 max-w-md text-white/60 leading-relaxed">
               A premium technology studio building intelligent digital products for global businesses.
               We design AI systems, SaaS platforms, blockchain & enterprise software that ship.
