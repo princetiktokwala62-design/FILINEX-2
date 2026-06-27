@@ -5,7 +5,7 @@ import { PROJECTS } from "@/data/projects";
 import AuroraBackground from "@/components/visuals/AuroraBackground";
 import { ArrowUpRight } from "lucide-react";
 
-const CATS = ["All", "AI · Healthcare", "FinTech · SaaS", "Web3 · Blockchain", "Generative AI · SaaS", "Consumer · Web3"];
+const CATS = ["All", "Web3 · DeFi", "FinTech · SaaS", "AI · Healthcare", "Consumer · FinTech", "3D · Gaming"];
 
 export default function Portfolio() {
   const [active, setActive] = useState("All");
